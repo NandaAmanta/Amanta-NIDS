@@ -1,0 +1,36 @@
+services:
+  # --- Service 1: Amanta NIDS Engine ---
+  amanta-nids-engine:
+    image: nandaamanta/amanta-nids:0.1.1-alpha
+    container_name: amanta-nids-engine
+    network_mode: "host"  
+    restart: always
+    privileged: true      
+    environment:
+      - PYTHONUNBUFFERED=1   
+    volumes:
+      - /var/lib/amanta-nids/data:/app/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # --- Service 2: Grafana Dashboards ---
+  grafana:
+    image: grafana/grafana:latest
+    container_name: amanta-grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=frser-sqlite-datasource
+    depends_on:
+      - amanta-nids-engine
+    volumes:
+      - /var/lib/amanta-nids/data:/var/lib/amanta-nids/data:ro
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  grafana-storage:

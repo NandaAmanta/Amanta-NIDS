@@ -1,0 +1,34 @@
+.gitattributes
+.git
+.gitignore
+
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.env
+.venv
+env/
+venv/
+
+data/
+*.db
+*.db-journal
+*.db-wal
+
+*.zip
+*.rar
+*.ipynb
+.ipynb_checkpoints/
+training_scripts/
+datasets/
+
+# Docker logs & metadata
+.dockerignore
+Dockerfile
+docker-compose.yml
+*.log
+
+# macOS / Windows system files
+.DS_Store
+Thumbs.db
