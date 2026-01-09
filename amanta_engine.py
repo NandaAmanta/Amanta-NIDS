@@ -125,7 +125,13 @@ def save_log_entry(conn, data):
         conn.commit()
     except Exception: pass
 
-streamer = NFStreamer(source="any", statistical_analysis=True, idle_timeout=1, active_timeout=1)
+streamer = NFStreamer(
+    source="any",
+    statistical_analysis=True,
+    idle_timeout=1,
+    active_timeout=1,
+    promiscuous_mode=True
+)
 print("🛡️ Amanta NIDS Engine is LIVE (Dataset: CICIDS2017 Cleaned)...")
 
 for flow in streamer:
@@ -168,12 +174,11 @@ for flow in streamer:
         }
         save_log_entry(db_conn, log_entry)
 
-        icon = "🟢" if label == "Normal Traffic" else "⚠️"
-        pkt_info = f"Pkts: {flow.bidirectional_packets}"
-        if flow.bidirectional_packets > 1000:
-            pkt_info = f"\033[91mPkts: {flow.bidirectional_packets}\033[0m"
-
-        print(f"{icon} [{now}] {label:20} | {flow.src_ip:15} -> {flow.dst_ip:15} | Conf: {confidence*100:.1f}% | {pkt_info}")
+        # icon = "🟢" if label == "Normal Traffic" else "⚠️"
+        # pkt_info = f"Pkts: {flow.bidirectional_packets}"
+        # if flow.bidirectional_packets > 1000:
+        #     pkt_info = f"\033[91mPkts: {flow.bidirectional_packets}\033[0m"
+        # print(f"{icon} [{now}] {label:20} | {flow.src_ip:15} -> {flow.dst_ip:15} | Conf: {confidence*100:.1f}% | {pkt_info}")
 
     except Exception as e:
         print(f"Error: {e}") 
