@@ -1,6 +1,9 @@
 # Amanta NIDS: AI-Powered Network Intrusion Detection System
 Amanta NIDS is a real-time Network Intrusion Detection System (NIDS) that leverages Machine Learning to identify and classify network attacks. It integrates NFStream for deep packet inspection and a Random Forest model trained on the CIC-IDS2017 dataset to provide live security monitoring through a Web Dashboard.
 
+## Note
+ This Project still under development. if you have any suggestion, please feel free to create an issue or contact me. I will be really happy to know your thought about this work 😁️
+
 ## 🚀 Features
 - Real-time Traffic Analysis: Captures and processes live network flows using NFStreamer.
 
